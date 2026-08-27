@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstddef>
 #include <stdexcept>
+#include <cmath>
 
 using namespace std;
 
@@ -41,6 +42,18 @@ public:
   Tensor view(const vector<size_t>& new_shape) const;
   Tensor unsqueeze(size_t dim) const;
 
+  // SECCION 7: Concatenacion
+  static Tensor concat(const vector<Tensor>& tensores, size_t dim);
+
+  // SECCION 8: Funciones amigas permitidas
+  friend Tensor dot(const Tensor& a, const Tensor& b);
+  friend Tensor matmul(const Tensor& a, const Tensor& b);
+
+  // SECCION 9: Red Neuronal
+  Tensor relu() const;
+  Tensor sigmoid() const;
+  size_t size() const { return total_size; }
+  void print_shape() const;
 };
 
 #endif // TENSOR_H
