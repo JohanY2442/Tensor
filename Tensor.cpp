@@ -109,6 +109,20 @@ Tensor& Tensor::operator=(const Tensor& other) {
   return *this;
 }
 
+Tensor& Tensor::operator=(Tensor&& other) noexcept {
+  if (this != &other){
+    delete[] data;
+    shape = other.shape;
+    total_size = other.total_size;
+    data = other.data;
+    other.data = nullptr;
+    other.total_size = 0;
+    other.shape.clear();
+  }
+
+  return *this;
+}
+
 
 // SECCION 5: Sobrecarga de operadores
 
